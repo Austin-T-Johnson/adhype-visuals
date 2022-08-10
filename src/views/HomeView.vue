@@ -50,7 +50,7 @@
         <div class="input-div">
           <label class="label">Name</label>
           <input
-            v-model="usersName"
+            v-model="name"
             class="input-input"
            type="text"
             />
@@ -59,7 +59,7 @@
         <div class="input-div">
           <label class="label">Email</label>
           <input
-            v-model="usersEmail"
+            v-model="email"
             class="input-input"
             type="text"
             />
@@ -68,7 +68,7 @@
         <div class="input-div">
           <label class="label">Message</label>
           <input
-            v-model="usersMessage"
+            v-model="message"
             class="input-input"
             type="text"
            />
@@ -88,36 +88,36 @@ export default defineComponent({
   name: "HomeView",
   data() {
     return {
-      usersName: "",
-      usersEmail: "",
-      usersMessage: "",
+      name: "",
+      email: "",
+      message: "",
       modal: false,
       artists,
     };
   },
   computed:{
      formValid() {
-      const { usersName, usersEmail, usersMessage } = this;
+      const { name, email, message } = this;
       return (
-        usersName.length > 0 &&
-        /(.+)@(.+){2,}.(.+){2,}/.test(usersEmail) &&
-        usersMessage.length > 0
+        name.length > 0 &&
+        /(.+)@(.+){2,}.(.+){2,}/.test(email) &&
+        message.length > 0
       );
     },
   },
   methods: {
    async submit(e) {
     e.preventDefault()
-    let post = {name: this.usersName, email: this.usersEmail, message: this.usersMessage}
+    let post = {name: this.name, email: this.email, message: this.message}
     try{
         await axios.post("/api/contact", post)
     } catch(error) {
         console.log(error)
     }
     
-     this.usersName = '',
-      this.usersEmail = '',
-      this.usersMessage = ''
+     this.name = '',
+      this.email = '',
+      this.message = ''
     },
   },
   components: {},
