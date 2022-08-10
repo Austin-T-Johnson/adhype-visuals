@@ -1,0 +1,60 @@
+module.exports = {
+  root: true,
+  env: {
+    node: true
+  },
+  'extends': [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    '@vue/typescript/recommended'
+  ],
+  parserOptions: {
+    ecmaVersion: 2020
+  },
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'nuxt/no-cjs-in-config': 'off',
+    "generator-star-spacing": "off",
+    "quotes": "off",
+    "space-before-function-paren": "off",
+    "semi": "off",
+    "camelcase": "off",
+    "no-redeclare":"off",
+    "indent":"off",
+    "no-unused-vars":"off",
+    "vue/max-attributes-per-line":"off",
+    "no-var":"off",
+    "arrow-parens":"off",
+    "prefer-const":"off",
+    "spaced-comment": "off",
+    "handle-callback-err": "off",
+    "no-trailing-spaces": "off",
+    "no-multiple-empty-lines": "off",
+    "standard/computed-property-even-spacing":"off",
+    "no-irregular-whitespace":"off",
+    "comma-spacing":"off",
+    "eol-last":"off",
+    "space-before-blocks":"off",
+    "vue/no-use-v-if-with-v-for":"off",
+    "vue/no-unused-components":"off",
+    "dot-notation":"off",
+    "no-console":"off",
+    "no-undef":"off",
+    "import/order":"off",
+    "key-spacing":"off",
+    "keyword-spacing":"off",
+    "no-lonely-if":"off",
+    "curly":"off",
+    "padded-blocks":"off",
+    "one-var":"off",
+    "no-tabs":"off",
+    "space-infix-ops":"off",
+    "space-in-parens":"off",
+    "object-curly-spacing":"off",
+    "no-multi-spaces":"off",
+    "brace-style":"off",
+    "eqeqeq":"off",
+    "@typescript-eslint/no-empty-function":"off"
+  }
+}

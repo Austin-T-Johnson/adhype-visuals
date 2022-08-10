@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Design & Branding",
+        "desc": "Branding is so much more than 'just a logo'. It's convaying your brands personal identity by showcasing it's core DNA.",
+        "img": "/adhype-visuals-retro-v2-01.png" 
+    },
+    {
+        "name": "Visual Content",
+        "desc": "We believe the visual aspect of any concert is just as important as what the music is convaying. We work together in coming up with visual methods to tell the perfect story",
+        "img": "/BH-LED.jpg" 
+    },
+    {
+        "name": "Web Design",
+        "desc": "Web Design is a complex subject, we as designers and developers have to consider both visual appearance and how to convay a company's message. We will work with you hand in hand every step of the way to ensure your end users will see your company's core values as well as get to navigate a clean, modern, and interactive UI. ",
+        "img": "/Desktop.png" 
+    },
+    {
+        "name": "Creative Direction",
+        "desc": "Creative Direction can be the difference between a successful brand and one that never takes off. It is a powerful tool, capable of helping you connect with your audience on a much deeper level. We combine our expertise in design, strategy, technology, and art to develope and empower your brand to its fullest potential.",
+        "img": "/creative-design-04.png" 
+    }
+]

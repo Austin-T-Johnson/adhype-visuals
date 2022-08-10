@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Austin Johnson",
+        "position": "CEO / VJ / Graphic Designer / Web Developer",
+        "img": " /aj.jpg",
+        "desc": "Adhype Visuals founder Austin Johnson has been a VJ / visual designer for the last 10 years of his career. With a keen eye for design he has worked with clients and artists alike to bring their vision to life. His design experience has transfered into front end web development making designing UI and creating web pages a new passion."
+    },
+    {
+        "name": "Dex Honsa",
+        "position": "Web Developer / Visual Artist / Graphic Designer",
+        "img": "/dex.jpeg",
+        "desc": "Dex has been working with Adhype Visuals since its inception. Having a strong passion for electronic music he spent many years producing / DJing and got his start creating visuals for his own sets. His history of music production and Djing gives him the ability to create a strong connection between the client's music and the visual content he creates."
+    },
+    {
+        "name": "Daniel Mashek",
+        "position": "Project Manager / VJ / Video Engineer / LED Wall Technition",
+        "img": "/daniel.jpeg",
+        "desc": "Daniel is a VJ, Project Manager, and Video Engineer that has been in the music industry for the last 10 years. With a passion for pixels and all things LED he has designed and deployed numerous creative led wall packages for touring artists. His strong attention to detail always ensures the event he is on goes off without a hitch."
+    }
+]
