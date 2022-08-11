@@ -84,27 +84,9 @@
 import { defineComponent } from "vue";
 import artists from "../JSON/artists.json";
 import axios from 'axios';
-import { reactive } from "vue";
-import { useVuelidate } from "@vuelidate/core";
-import { required, minLength, email, alpha } from "@vuelidate/validators";
 export default defineComponent({
   name: "HomeView",
-  setup() {
-    const state = reactive({
-      name: "",
-      email: "",
-      message: "",
-    });
-    const rules = {
-      name: { required },
-      email: { required, email },
-      message: { required },
-    };
-
-    const v$ = useVuelidate(rules, state, { $lazy: true });
-
-    return { state, v$ };
-  },
+  
   data() {
     return {
       name: "",
@@ -114,37 +96,21 @@ export default defineComponent({
       artists,
     };
   },
-   validations() {
-    return {
-      name: { required, alpha, minLength: minLength(1) },
-      email: { required, email, minLength: minLength(1) },
-      message: { required, minLength: minLength(1) },
-    };
-  },
-  computed:{
-     
-    disabled() {
-        return (
-          !this.name && !this.email && !this.message  
-        )
-    },
-},
+  computed:{},
   methods: {
-   async submit(e) {
+    async submit(e) {
       e.preventDefault();
       let post = { name: this.name, email: this.email, message: this.message };
-      const isFormCorrect = await this.v$.$validate();
       try {
-        if (!this.name && !this.email && !this.message) {
-          this.$toast.error(`Please fill out all fields`, { position: "bottom" });
-        } else if (!isFormCorrect) {
+        if (this.name == "" || this.email == "" || this.message == "") {
+          this.$toast.error(`Please fill out all fields`, { position: "top" });
+        } else {
           await axios.post("/api/contact", post);
-          this.$toast.success(`Message Sent!`, { position: "bottom" });
+          this.$toast.success(`Message Sent!`, { position: "top" });
+          (this.name = ""), (this.email = ""), (this.message = "");
         }
       } catch (error) {
         console.log(error);
-      } finally {
-        (this.name = ""), (this.email = ""), (this.message = "");
       }
     },
   },

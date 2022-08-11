@@ -35,29 +35,8 @@
 <script>
 import { defineComponent } from "vue";
 import axios from "axios";
-import { reactive } from "vue";
-import { useVuelidate } from "@vuelidate/core";
-import { required, minLength, email, alpha } from "@vuelidate/validators";
-
 export default defineComponent({
   name: "ContactView",
-
-  setup() {
-    const state = reactive({
-      name: "",
-      email: "",
-      message: "",
-    });
-    const rules = {
-      name: { required },
-      email: { required, email },
-      message: { required },
-    };
-
-    const v$ = useVuelidate(rules, state, { $lazy: true });
-
-    return { state, v$ };
-  },
 
   data() {
     return {
@@ -66,30 +45,22 @@ export default defineComponent({
       message: "",
     };
   },
-  validations() {
-    return {
-      name: { required, alpha, minLength: minLength(1) },
-      email: { required, email, minLength: minLength(1) },
-      message: { required, minLength: minLength(1) },
-    };
-  },
+
   computed: {},
   methods: {
     async submit(e) {
       e.preventDefault();
       let post = { name: this.name, email: this.email, message: this.message };
-      const isFormCorrect = await this.v$.$validate();
       try {
-        if (!this.name && !this.email && !this.message) {
+        if (this.name == "" || this.email == "" || this.message == "") {
           this.$toast.error(`Please fill out all fields`, { position: "top" });
-        } else if (!isFormCorrect) {
+        } else {
           await axios.post("/api/contact", post);
           this.$toast.success(`Message Sent!`, { position: "top" });
+          (this.name = ""), (this.email = ""), (this.message = "");
         }
       } catch (error) {
         console.log(error);
-      } finally {
-        (this.name = ""), (this.email = ""), (this.message = "");
       }
     },
   },
@@ -120,13 +91,6 @@ h2 {
   width: 100%;
   margin: 0 auto;
 }
-
-// .errorMessage {
-//     color: red;
-// }
-// .hidden {
-//     display: none;
-// }
 
 .contact-form {
   width: 50%;
@@ -213,23 +177,6 @@ button {
   transition-duration: 400ms;
   transition-property: color;
 }
-// .disabled {
-//   margin-top: 20px;
-//   font-size: 18px;
-//   color: $light-grey-8;
-//   font-weight: 800;
-//   position: relative;
-//   border: none;
-//   background: none;
-//   text-transform: uppercase;
-// //   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-// //   transition-duration: 400ms;
-// //   transition-property: color;
-// }
-// .disabled:hover {
-//     color: $light-grey-8;
-//     pointer-events: none;
-// }
 
 button:focus,
 button:hover {
