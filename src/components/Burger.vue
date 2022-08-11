@@ -1,5 +1,5 @@
 <template>
-  <div class="container show-mobile" >
+  <div class="container show-mobile">
     <div class="burger-container">
       <button
         v-bind:class="[isActive ? 'hamburger--3dx is-active' : 'hamburger']"
@@ -7,49 +7,19 @@
         type="button"
       >
         <span class="hamburger-box">
-          <span class="hamburger-inner" :class="{'inner-active':isActive}"></span>
+          <span
+            class="hamburger-inner"
+            :class="{ 'inner-active': isActive }"
+          ></span>
         </span>
       </button>
     </div>
 
     <div class="mobile-nav" v-if="isActive">
-      <router-link
-        v-if="this.$route.path === '/'"
-        style="color: $light-grey-1"
-        class="nav"
-        to="/"
-        ><li>Home</li></router-link
-      >
-      <router-link v-else class="nav" to="/"><li>Home</li></router-link>
-
-      <router-link
-        v-if="this.$route.path === '/about'"
-        style="color: $light-grey-1"
-        class="nav"
-        to="/about"
-        ><li>About</li></router-link
-      >
-      <router-link v-else class="nav" to="/about"><li>About</li></router-link>
-
-      <router-link
-        v-if="this.$route.path === '/design'"
-        style="color: $light-grey-1"
-        class="nav"
-        to="/design"
-        ><li>Design</li></router-link
-      >
-      <router-link v-else class="nav" to="/design"><li>Design</li></router-link>
-
-      <router-link
-        v-if="this.$route.path === '/contact'"
-        style="color: $light-grey-1"
-        class="nav"
-        to="/contact"
-        ><li>Contact</li></router-link
-      >
-      <router-link v-else class="nav" to="/contact"
-        ><li>Contact</li></router-link
-      >
+      <router-link @click="toggleActive()" class="nav" to="/"><li>Home</li></router-link>
+      <router-link @click="toggleActive()" class="nav" to="/about"><li>About</li></router-link>
+      <router-link @click="toggleActive()" class="nav" to="/design"><li>Design</li></router-link>
+      <router-link @click="toggleActive()" class="nav" to="/contact"><li>Contact</li></router-link>
     </div>
   </div>
 </template>
@@ -78,32 +48,31 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-}
+  }
 
   .burger-container {
     width: 100%;
     position: absolute;
     top: 0;
     padding-right: 2%;
-   display: flex;
+    display: flex;
     justify-content: right;
     gap: 15px;
     align-items: center;
     z-index: 5;
   }
-    .nav {
-      text-decoration: none;
-      color: black;
-      list-style: none;
-      font-size: 2rem;
-      line-height: 250%;
-     
-    }
-  .mobile-nav{
-    height:100vh;
+  .nav {
+    text-decoration: none;
+    color: black;
+    list-style: none;
+    font-size: 2rem;
+    line-height: 250%;
+  }
+  .mobile-nav {
+    height: 100vh;
     width: 100%;
-  background-color: $white;
-  padding-top: 25%;
+    background-color: $white;
+    padding-top: 25%;
   }
 
   .hamburger {
@@ -137,14 +106,13 @@ export default {
     display: block;
     top: 50%;
     margin-top: -2px;
-     &.inner-active{
-        &::before{
-             background-color: black !important;
-        }
-        &::after{
-             background-color: black !important;
-        }
-
+    &.inner-active {
+      &::before {
+        background-color: black !important;
+      }
+      &::after {
+        background-color: black !important;
+      }
     }
   }
   .hamburger-inner,
@@ -153,7 +121,7 @@ export default {
     width: 40px;
     height: 4px;
     background-color: $white;
-   
+
     border-radius: 4px;
     position: absolute;
     transition-property: transform;
