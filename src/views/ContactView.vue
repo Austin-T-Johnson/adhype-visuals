@@ -1,85 +1,96 @@
 <template>
- 
-    <div class="contact-h1">
-      <h1 class="contact-us">Contact Us</h1>
+  <div class="contact-h1">
+    <h1 class="contact-us">Contact Us</h1>
+  </div>
+  <section class="form">
+    <div class="h2-div">
+      <h2>Get in Touch</h2>
     </div>
-    <section class="form">
 
-      <div class="h2-div">
-        <h2>Get in Touch</h2>
+    <form class="contact-form">
+      <div class="input-div">
+        <label class="label">Name</label>
+
+        <input v-model="name" class="input-input" type="text" />
       </div>
 
-      <form  class="contact-form" method="POST" action="contact">
-        <div class="input-div">
-          <label class="label">Name</label>
-          <input
-            v-model="name"
-            class="input-input"
-           type="text"
-            />
-        </div>
-        
-        <div class="input-div">
-          <label class="label">Email</label>
-          <input
-            v-model="email"
-            class="input-input"
-            type="text"
-            />
-        </div>
+      <div class="input-div">
+        <label class="label">Email</label>
 
-        <div class="input-div">
-          <label class="label">Message</label>
-          <input
-            v-model="message"
-            class="input-input"
-            type="text"
-           />
-        </div>
-      </form>
-      <div class="btn-content">
-        <button @click="submit" type="submit">Send It!</button>
+        <input v-model="email" class="input-input" type="text" />
       </div>
-    </section>
- 
+
+      <div class="input-div">
+        <label class="label">Message</label>
+
+        <input v-model="message" class="input-input" type="text" />
+      </div>
+    </form>
+    <div class="btn-content">
+      <button @click="submit" type="submit">Send It!</button>
+    </div>
+  </section>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import axios from 'axios';
+import axios from "axios";
+import { reactive } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, minLength, email, alpha } from "@vuelidate/validators";
+
 export default defineComponent({
   name: "ContactView",
+
+  setup() {
+    const state = reactive({
+      name: "",
+      email: "",
+      message: "",
+    });
+    const rules = {
+      name: { required },
+      email: { required, email },
+      message: { required },
+    };
+
+    const v$ = useVuelidate(rules, state, { $lazy: true });
+
+    return { state, v$ };
+  },
+
   data() {
     return {
       name: "",
       email: "",
       message: "",
-
     };
   },
-  computed:{
-     formValid() {
-      const { name, email, message } = this;
-      return (
-        name.length > 0 &&
-        /(.+)@(.+){2,}.(.+){2,}/.test(email) &&
-        message.length > 0
-      );
-    },
+  validations() {
+    return {
+      name: { required, alpha, minLength: minLength(1) },
+      email: { required, email, minLength: minLength(1) },
+      message: { required, minLength: minLength(1) },
+    };
   },
+  computed: {},
   methods: {
-   async submit(e) {
-    e.preventDefault()
-    let post = {name: this.name, email: this.email, message: this.message}
-    try{
-        await axios.post("/api/contact", post)
-    } catch(error) {
-        console.log(error)
-    }
-    
-     this.name = '',
-      this.email = '',
-      this.message = ''
+    async submit(e) {
+      e.preventDefault();
+      let post = { name: this.name, email: this.email, message: this.message };
+      const isFormCorrect = await this.v$.$validate();
+      try {
+        if (!this.name && !this.email && !this.message) {
+          this.$toast.error(`Please fill out all fields`, { position: "top" });
+        } else if (!isFormCorrect) {
+          await axios.post("/api/contact", post);
+          this.$toast.success(`Message Sent!`, { position: "top" });
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        (this.name = ""), (this.email = ""), (this.message = "");
+      }
     },
   },
   components: {},
@@ -87,8 +98,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-
-
 .contact-us {
   font-family: $font;
   color: white;
@@ -111,6 +120,13 @@ h2 {
   width: 100%;
   margin: 0 auto;
 }
+
+// .errorMessage {
+//     color: red;
+// }
+// .hidden {
+//     display: none;
+// }
 
 .contact-form {
   width: 50%;
@@ -197,6 +213,23 @@ button {
   transition-duration: 400ms;
   transition-property: color;
 }
+// .disabled {
+//   margin-top: 20px;
+//   font-size: 18px;
+//   color: $light-grey-8;
+//   font-weight: 800;
+//   position: relative;
+//   border: none;
+//   background: none;
+//   text-transform: uppercase;
+// //   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+// //   transition-duration: 400ms;
+// //   transition-property: color;
+// }
+// .disabled:hover {
+//     color: $light-grey-8;
+//     pointer-events: none;
+// }
 
 button:focus,
 button:hover {
@@ -224,26 +257,26 @@ button:after {
 }
 
 @media (max-width: 1024px) {
-    .contact-h1{
-        padding-top:15%;
-    }
-    .contact-form{
-        width:100%;
-    }
+  .contact-h1 {
+    padding-top: 15%;
+  }
+  .contact-form {
+    width: 100%;
+  }
 }
 
 @media (max-width: 800px) {
- .contact-form{
-        width:100%;
-    }
+  .contact-form {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
-    .contact-h1{
-        padding-top:25%;
-    }
- .contact-form{
-        width:100%;
-    }
+  .contact-h1 {
+    padding-top: 25%;
+  }
+  .contact-form {
+    width: 100%;
+  }
 }
 </style>

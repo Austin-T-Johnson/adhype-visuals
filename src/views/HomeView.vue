@@ -84,8 +84,27 @@
 import { defineComponent } from "vue";
 import artists from "../JSON/artists.json";
 import axios from 'axios';
+import { reactive } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, minLength, email, alpha } from "@vuelidate/validators";
 export default defineComponent({
   name: "HomeView",
+  setup() {
+    const state = reactive({
+      name: "",
+      email: "",
+      message: "",
+    });
+    const rules = {
+      name: { required },
+      email: { required, email },
+      message: { required },
+    };
+
+    const v$ = useVuelidate(rules, state, { $lazy: true });
+
+    return { state, v$ };
+  },
   data() {
     return {
       name: "",
@@ -95,29 +114,38 @@ export default defineComponent({
       artists,
     };
   },
-  computed:{
-     formValid() {
-      const { name, email, message } = this;
-      return (
-        name.length > 0 &&
-        /(.+)@(.+){2,}.(.+){2,}/.test(email) &&
-        message.length > 0
-      );
-    },
+   validations() {
+    return {
+      name: { required, alpha, minLength: minLength(1) },
+      email: { required, email, minLength: minLength(1) },
+      message: { required, minLength: minLength(1) },
+    };
   },
+  computed:{
+     
+    disabled() {
+        return (
+          !this.name && !this.email && !this.message  
+        )
+    },
+},
   methods: {
    async submit(e) {
-    e.preventDefault()
-    let post = {name: this.name, email: this.email, message: this.message}
-    try{
-        await axios.post("/api/contact", post)
-    } catch(error) {
-        console.log(error)
-    }
-    
-     this.name = '',
-      this.email = '',
-      this.message = ''
+      e.preventDefault();
+      let post = { name: this.name, email: this.email, message: this.message };
+      const isFormCorrect = await this.v$.$validate();
+      try {
+        if (!this.name && !this.email && !this.message) {
+          this.$toast.error(`Please fill out all fields`, { position: "bottom" });
+        } else if (!isFormCorrect) {
+          await axios.post("/api/contact", post);
+          this.$toast.success(`Message Sent!`, { position: "bottom" });
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        (this.name = ""), (this.email = ""), (this.message = "");
+      }
     },
   },
   components: {},
