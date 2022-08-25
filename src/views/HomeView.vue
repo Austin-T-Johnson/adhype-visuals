@@ -5,11 +5,11 @@
     </div>
   </transition>
   <div class="top-background-img"></div>
-  
+
   <div class="adhype-container">
     <h1>Adhype Visuals</h1>
     <h2 class="description">
-      Your one stop shop for <br /><br />Visual Content, Web Design, Creative
+      Your one-stop shop for <br /><br />Visual Content, Web Design, Creative
       Direction, Graphic Design & Branding
     </h2>
   </div>
@@ -40,53 +40,40 @@
   <!-- Contact -->
 
   <section class="form">
+    <div class="h2-div">
+      <!-- {{msg}} -->
+      <h2 class="get-in-touch">Get in Touch</h2>
+    </div>
 
-      <div class="h2-div">
-        <!-- {{msg}} -->
-        <h2 class="get-in-touch">Get in Touch</h2>
+    <form @submit="submit" class="contact-form" method="POST" action="contact">
+      <div class="input-div">
+        <label class="label">Name</label>
+        <input v-model="name" class="input-input" type="text" />
       </div>
 
-      <form @submit="submit" class="contact-form" method="POST" action="contact">
-        <div class="input-div">
-          <label class="label">Name</label>
-          <input
-            v-model="name"
-            class="input-input"
-           type="text"
-            />
-        </div>
-        
-        <div class="input-div">
-          <label class="label">Email</label>
-          <input
-            v-model="email"
-            class="input-input"
-            type="text"
-            />
-        </div>
-
-        <div class="input-div">
-          <label class="label">Message</label>
-          <input
-            v-model="message"
-            class="input-input"
-            type="text"
-           />
-        </div>
-      </form>
-      <div class="btn-content">
-        <button @click="submit">Send It!</button>
+      <div class="input-div">
+        <label class="label">Email</label>
+        <input v-model="email" class="input-input" type="text" />
       </div>
-    </section>
+
+      <div class="input-div">
+        <label class="label">Message</label>
+        <input v-model="message" class="input-input" type="text" />
+      </div>
+    </form>
+    <div class="btn-content">
+      <button @click="submit">Send It!</button>
+    </div>
+  </section>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import artists from "../JSON/artists.json";
-import axios from 'axios';
+import axios from "axios";
 export default defineComponent({
   name: "HomeView",
-  
+
   data() {
     return {
       name: "",
@@ -96,7 +83,7 @@ export default defineComponent({
       artists,
     };
   },
-  computed:{},
+  computed: {},
   methods: {
     async submit(e) {
       e.preventDefault();
@@ -149,11 +136,7 @@ h1 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
- 
-
 }
-
-
 
 .adhype-container {
   position: absolute;
@@ -395,47 +378,56 @@ button:after {
   animation-fill-mode: both;
 }
 
+@media (max-height: 960px) {
+  .artist-imgs-container {
+    height: 40vh;
+    width: 45vh;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .artist-txt {
+    width: 45vh;
+  }
+}
+
 @media (max-width: 1024px) {
-    .worked-with{
-        margin: 16% 0;
-    }
-   .bottom-container {
-  height: 100%;
- }
- .contact-form{
-        width: 100%;
-    }
+  .worked-with {
+    margin: 16% 0;
+  }
+  .bottom-container {
+    height: 100%;
+  }
+  .contact-form {
+    width: 100%;
+  }
 }
 @media (max-width: 800px) {
-.worked-with{
-        margin-bottom: 25%;
-    }
-    .contact-form{
-        width: 100%;
-    }
-.adhype-container{
-     position: absolute;
-  z-index: 1;
-  color: white;
-  height: 100vh;
-  width: 100%;
-  background: RGB(0, 0, 0, 0.5);
-  top: 0;
-  display: block;
-  padding-top: 10%;
-  align-items: center;
-}
-    
-   
+  .worked-with {
+    margin-bottom: 25%;
+  }
+  .contact-form {
+    width: 100%;
+  }
+  .adhype-container {
+    position: absolute;
+    z-index: 1;
+    color: white;
+    height: 100vh;
+    width: 100%;
+    background: RGB(0, 0, 0, 0.5);
+    top: 0;
+    display: block;
+    padding-top: 10%;
+    align-items: center;
+  }
 }
 
 @media (max-width: 480px) {
-.worked-with{
-        margin-bottom: 66%;
-    }
-    .contact-form{
-        width: 100%;
-    }
-
+  .worked-with {
+    margin-bottom: 66%;
+  }
+  .contact-form {
+    width: 100%;
+  }
 }
 </style>

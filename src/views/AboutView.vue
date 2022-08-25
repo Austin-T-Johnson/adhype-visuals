@@ -3,15 +3,7 @@
     <div class="about-div">
       <h1 class="about-txt">About Us</h1>
       <h3>
-        Adhype Visuals is in its second year of operation as a creative content
-        studio that specializes in visual experiences. We are a team of
-        designers, web developers, video engieers, and programmers that focus on
-        live events, web design, graphic design, and virtual streaming
-        showcases. We create visually stunning experiences that are uniquely
-        designed for individual artists or the event as a whole. Our background
-        in the touring music industry as well as the corporate world has taught
-        us to focus on the visual story which provides memorable moments to the
-        audiences.
+        Adhype Visuals is in its second year as a creative content studio specializing in visual experiences. We are a team of designers, web developers, video engineers, and programmers that focus on live events, web design, graphic design, and virtual streaming showcases. We create visually stunning experiences uniquely designed for individual artists or the event as a whole. Our background in the touring music industry and the corporate world has taught us to focus on the visual story that provides memorable moments to the audiences.
       </h3>
     </div>
 
