@@ -15,7 +15,3 @@ div{
   box-sizing: border-box;
 }
 
-@font-face {
-    font-family: "Azonix";
-    src: url("/public/fonts/Azonix.otf") format("otf");
-}

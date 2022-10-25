@@ -45,6 +45,12 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@font-face {
+    font-family: "Azonix";
+    src: local("Azonix"),
+     url("/src/fonts/Azonix.otf") format("otf");
+}
+
 .background {
   height: 100%;
   width: 100%;
@@ -63,7 +69,7 @@ export default defineComponent({
 }
 
 .about-txt {
-  font-family: $font;
+  font-family: "Azonix";
   font-size: 2.5rem;
 }
 h1 {

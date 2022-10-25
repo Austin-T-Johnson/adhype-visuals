@@ -42,6 +42,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@font-face {
+    font-family: "Azonix";
+    src: local("Azonix"),
+     url("/src/fonts/Azonix.otf") format("otf");
+}
 
 
 h1,
@@ -58,7 +63,7 @@ h2 {
 
 .vision {
   font-size: 3rem;
-  font-family: $font;
+  font-family: "Azonix";
   padding-top: 2%;
 }
 

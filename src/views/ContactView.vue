@@ -69,8 +69,14 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@font-face {
+    font-family: "Azonix";
+    src: local("Azonix"),
+     url("/src/fonts/Azonix.otf") format("otf");
+}
+
 .contact-us {
-  font-family: $font;
+  font-family: "Azonix";
   color: white;
   font-size: 2.5rem;
   margin-top: 5%;

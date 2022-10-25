@@ -106,6 +106,12 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@font-face {
+    font-family: "Azonix";
+    src: local("Azonix"),
+     url("/src/fonts/Azonix.otf") format("otf");
+}
+
 .modal {
   position: fixed;
   height: 100vh;
@@ -121,7 +127,7 @@ export default defineComponent({
 }
 
 h1 {
-  font-family: $font;
+  font-family: "Azonix";
   font-size: 4rem;
   color: white;
 }
@@ -168,7 +174,7 @@ h1 {
   width: 100%;
   margin: 5% 0;
   h1 {
-    font-family: $font;
+    font-family: "Azonix";
     font-size: 4rem;
     color: $white;
     height: 10vh;
